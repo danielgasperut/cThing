@@ -1,0 +1,23 @@
+http://data.cityofchicago.org/resource/mq3i-nnqe.json
+
+
+from peewee import SqliteDatabase, CharField, ForeignKeyField, Model, PostgresqlDatabase
+
+db = SqliteDatabase(':memory:')
+
+class Person(Model):
+	name = CharField()
+	class Meta:
+		database = db
+
+
+class Address(Model):
+	address = CharField()
+	person = ForeignKeyField(Person)
+	class Meta:
+		database = db
+>>> Person.create_table()
+>>> Address.create_table()
+
+--Install this for the orm! psycopg2
+--Using the peewee orm
